@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZipLink</title>
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+    <div class="warning">Your browser doesn't support scroll animations. This demo will not work.</div>
+    <header class="site-header">
+        <h1>Zip<span>Link</span></h1>
+        <label class="mobile-menu-button hamburger-icon">
+            <input type="radio" name="toggle-navigation" class="open-navigation navigation-closed" autocomplete="off">
+            <span class="visually-hidden">Open Navigation</span>
+        </label>
+        <nav class="site-navigation">
+            <div class="navigation-animation-wrapper">
+                <label class="mobile-menu-button close-icon">
+                    <input type="radio" name="toggle-navigation" class="close-navigation navigation-opened" autocomplete="off">
+                    <span class="visually-hidden">Close navigation</span>
+                </label>
+                <ul class="nav-list">
+                    <li style="--index: 0"><a href="#">Home</a></li>
+                    <li style="--index: 1"><a href="#">Portfolio</a></li>
+                    <li style="--index: 2"><a href="#">Projects</a></li>
+                    <li style="--index: 3"><a href="#">About</a></li>
+                    <li style="--index: 4"><a href="#">Blog</a></li>
+                    <li style="--index: 5"><a href="#" class="button">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="left-content">
+            <h2>Using CSS <span>scroll animations</span> to detect visibility changes</h2>
+        </div>
+        <div class="right-content">
+            <!-- <p>Resize the window to see the layout change automatically without media queries or JavaScript.</p>
+            <p>See “<a href="https://cdpn.io/pen/debug/gOEQmVW/#tracking" target="_top">Content-aware collapsing menu using CSS scroll animations</a>” for an explanation of what's happening here.</p> -->
+            <div class="search">
+              <input type="text"placeholder="Paste your link...">
+              <div class="button-src">
+                  <button>Paste</button>
+              </div>
+           </div>
+        </div>
+    </main>
+    <footer>
+        <p>Unstable. <a href="https://cdpn.io/pen/debug/gOEQmVW/#probably-bug" target="_top">Do not use in production</a>.</p>
+    </footer>
+</body>
+</html>

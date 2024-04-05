@@ -1,0 +1,859 @@
+
+:root {
+  /* Sizes */
+  --rhythm: 1.6;
+  --spacing: calc(var(--rhythm) * 1rem);
+  --max-content-width: 90rem;
+  --min-tap-size: 48px;
+
+  /* Colors */
+  --color-purple: oklch(66% 0.2 306);
+  --color-lavender: oklch(70% 0.15 306);
+  --color-pink: oklch(70% 0.15 348);
+  --color-yellow: oklch(85% 0.1 108);
+  --color-cyan: oklch(85% 0.1 190);
+  --color-cyan-light: oklch(88% 0.03 190);
+
+  --color-background: oklch(16% 0.011 248);
+  --color-text: oklch(75% 0.018 248);
+  --color-text-bright: #fff;
+
+  background-color: var(--color-background);
+  color-scheme: dark;
+  overflow-x: clip;
+}
+
+*,
+*::before,
+*::after {
+  background-repeat: no-repeat;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-family: Inter, Roboto, "Helvetica Neue", "Arial Nova", "Nimbus Sans",
+    Arial, sans-serif;
+  font-size: clamp(1rem, 0.904rem + 0.481vw, 1.25rem);
+  line-height: var(--rhythm);
+  justify-content: space-between;
+  margin: 0;
+  min-height: 100dvh;
+  position: relative;
+}
+
+body,
+main,
+header {
+  display: flex;
+  gap: var(--spacing);
+  flex-direction: column;
+  position: relative;
+}
+
+main,
+header {
+  align-self: center;
+  max-width: var(--max-content-width);
+  width: 100%;
+}
+
+header {
+  flex: 0;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-block: var(--spacing);
+  text-align: center;
+  z-index: 100;
+}
+
+main {
+  flex: 1;
+  justify-content: center;
+}
+
+/* Header styles */
+
+.warning {
+  display: none;
+}
+
+.site-navigation {
+  flex: 1;
+}
+
+.nav-list {
+  gap: var(--spacing);
+  margin: 0;
+  padding: 0;
+
+  & li,
+  & a {
+    display: block;
+  }
+
+  & a {
+    text-decoration: none;
+    padding: 0.25em 0.5em;
+  }
+
+  li:first-child,
+  & li:has(.button) {
+    margin-inline-start: auto;
+  }
+
+  & li:has(.button) {
+    margin-inline-end: var(--spacing);
+  }
+}
+
+/* Header page title */
+h1 {
+  border-block: 1px solid transparent; /* alignment with button/links */
+  font-size: 1em;
+  font-weight: 200;
+  line-height: var(--rhythm);
+  letter-spacing: 0.02em;
+  margin: 0;
+  padding-block: 0.25em; /* Match links */
+  white-space: nowrap;
+
+  & span {
+    color: var(--color-text-bright);
+    font-weight: 700;
+  }
+}
+
+/* Section title */
+
+h2 {
+  font-size: clamp(2rem, 1.231rem + 3.846vw, 4rem);
+  font-weight: 200;
+  line-height: 1.1;
+  text-wrap: balance;
+  margin: 0;
+  margin-block-end: var(--spacing);
+
+  & span {
+    color: var(--color-cyan);
+  }
+
+  /* Behold, the lone media query in this entire document */
+  @media (min-width: 40rem) {
+    font-weight: 100;
+  }
+}
+
+a {
+  color: var(--color-text-bright);
+  font-weight: 500;
+  text-underline-offset: 0.25em;
+  text-decoration-thickness: 1px;
+  transition: 0.25s;
+
+  &:hover,
+  &:focus {
+    color: var(--color-cyan);
+  }
+}
+
+p {
+  margin: 0;
+  margin-block-end: var(--spacing);
+}
+
+footer {
+  font-size: 0.8em;
+  text-align: center;
+  margin-inline: auto;
+  position: relative;
+  width: max-content;
+  max-width: 100%;
+  z-index: 2;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background-color: var(--color-background);
+    filter: blur(20px);
+    opacity: 0.6;
+  }
+
+  p {
+    margin-block: calc(var(--spacing) / 2);
+    margin-inline: var(--spacing);
+    position: relative;
+  }
+}
+
+.visually-hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+  height: 1px;
+}
+
+:root {
+  /* Background glows */
+  --color-glow-yellow: oklch(98% 0.01 108);
+  --color-glow-teal: oklch(92.73% 0.04 190);
+  --color-glow-pink: oklch(92.73% 0.04 348);
+  --color-glow-blue: oklch(80% 0.04 248);
+  --color-glow-purple: oklch(30% 0.075 306);
+
+  /* --color-text: oklch(96% 0.032 107); */
+
+  /* Kitten image */
+  --image-width: min(265px, 28vw);
+  --image-height: calc(var(--image-width) * 2.1283);
+  --image-clip-offset: 0.15094;
+  --image-outline-width: 1px;
+  --image-outline-color: oklch(70% 0.2 318);
+
+  --image-aware-padding: max(var(--spacing), var(--image-width) * 0.14);
+}
+
+body {
+  padding-block-start: var(--spacing);
+  padding-inline: var(--image-aware-padding);
+
+  /* Background glows */
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    mix-blend-mode: color-dodge;
+    opacity: 0.6;
+    z-index: 0;
+  }
+
+  /* Top left background glow */
+  &::before {
+    --light-size: 70vmin;
+
+    background-image: radial-gradient(
+      circle at center,
+      var(--color-glow-yellow),
+      black 70%
+    );
+    background-size: var(--light-size) var(--light-size);
+    background-position: calc(
+        50% - min(100vw, var(--max-content-width)) / 2 + 5vw
+      )
+      calc(var(--light-size) / -2 - 2vmin);
+  }
+
+  /* Bottom right background glow */
+  &::after {
+    --light-size: 100vw;
+
+    background-image: radial-gradient(
+      circle at center,
+      var(--color-glow-blue),
+      black 70%
+    );
+    background-size: var(--light-size) var(--light-size);
+    background-position: calc(100% + var(--light-size) / 2 + 2vmin)
+      calc(100% + var(--light-size) / 2 + 2vmin);
+  }
+}
+
+main {
+  &::before,
+  &::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  /* Wall */
+  &::before {
+    --background-size: 70vmax;
+    --border-position: calc(
+      var(--image-width) * var(--image-clip-offset) - var(--image-outline-width)
+    );
+
+    background-image: radial-gradient(
+      circle at center,
+      var(--color-glow-purple),
+      transparent 70%
+    );
+    background-size: var(--background-size) var(--background-size);
+    background-position: calc(100% + var(--background-size) / 2) 50%;
+
+    border-inline-end: var(--image-outline-width) solid
+      var(--image-outline-color);
+    border-image: linear-gradient(
+        transparent,
+        var(--image-outline-color),
+        transparent
+      )
+      1%;
+    inset-inline-end: var(--border-position);
+    opacity: 0.5;
+    z-index: 1;
+  }
+
+  /* Kitten */
+  &::after {
+    --gradient-clip: calc(
+      var(--image-clip-offset) * 100% - var(--image-outline-width)
+    );
+
+    background-image: url("https://assets.codepen.io/197359/kitten-peek-transparent.png"),
+      linear-gradient(
+        90deg,
+        var(--color-background) var(--gradient-clip),
+        transparent var(--gradient-clip)
+      );
+    background-position: 0% calc(50% + var(--spacing));
+    background-size: var(--image-width) auto;
+    min-height: calc(var(--image-height) + var(--spacing) * 5);
+    transform: scaleX(-1);
+    z-index: 2;
+  }
+
+  & > * {
+    margin-inline-end: calc(var(--image-width) - var(--image-aware-padding));
+  }
+}
+
+.left-content,
+.right-content {
+  max-width: 50ch;
+  position: relative;
+  z-index: 10;
+}
+
+@property --gradient-start {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: pink;
+}
+
+@property --gradient-end {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: purple;
+}
+
+/* Links */
+
+main a {
+  --gradient-start: var(--color-pink);
+  --gradient-end: var(--color-lavender);
+
+  background-image: linear-gradient(
+    90deg,
+    var(--gradient-start),
+    var(--gradient-end)
+  );
+  background-clip: text;
+  color: transparent;
+  transition: --gradient-start 0.5s, --gradient-end 0.5s;
+
+  &:hover,
+  &:focus {
+    --gradient-start: var(--color-cyan);
+    --gradient-end: var(--color-yellow);
+
+    color: transparent;
+  }
+}
+
+.button.button {
+  background: linear-gradient(45deg, var(--color-lavender), var(--color-cyan));
+  border-radius: var(--spacing);
+  border: 1px solid transparent;
+  color: var(--color-background);
+  font-weight: 600;
+  padding-inline: var(--spacing);
+  position: relative;
+  transition: 0.1s;
+
+  &::before,
+  &::after {
+    content: "";
+    border-radius: inherit;
+    transition: 0.25s ease-out;
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  /* Gradient shadow */
+  &::before {
+    inset: 0.2em;
+    transform-origin: bottom;
+    transform: scaleY(0.5);
+    opacity: 0;
+    z-index: -1;
+
+    background: linear-gradient(
+      45deg,
+      var(--color-lavender),
+      var(--color-cyan)
+    );
+    filter: blur(calc(var(--spacing) / 2)) saturate(2);
+  }
+
+  &:hover,
+  &:focus {
+    background: var(--color-background);
+    border-color: var(--color-lavender);
+    color: var(--color-text-bright);
+    font-weight: 400;
+    letter-spacing: 0.01em;
+
+    &::before,
+    &::after {
+      transform: none;
+      opacity: 1;
+    }
+  }
+}
+
+/* Menu buttons */
+.mobile-menu-button {
+  --width: var(--min-tap-size);
+  --height: var(--min-tap-size);
+
+  --line-thickness: 2px;
+  --line-spacing: 3px;
+
+  cursor: pointer;
+  display: block;
+  position: absolute;
+  inset-inline-end: var(--spacing);
+  width: var(--width);
+  height: var(--height);
+  z-index: 100;
+
+  & input {
+    cursor: pointer;
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+  }
+
+  &::before,
+  &::after {
+    --width: 100%;
+    --height: 100%;
+
+    content: "";
+    position: absolute;
+    inset-inline-start: 0;
+    width: var(--width);
+    height: var(--height);
+  }
+
+  &:hover,
+  &:focus {
+    &::before,
+    &::after {
+      --color-text-bright: var(--color-cyan);
+    }
+  }
+}
+
+.hamburger-icon {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 100%);
+
+  &::before,
+  &::after {
+    --height: calc(var(--line-thickness) * 3 + var(--line-spacing) * 2);
+
+    inset-block-start: calc(50% - var(--height) / 2);
+  }
+
+  &::before {
+    border-block: var(--line-thickness) solid var(--color-text-bright);
+  }
+
+  &::after {
+    border-block-start: var(--line-thickness) solid var(--color-text-bright);
+    margin-block-start: calc(var(--line-thickness) + var(--line-spacing));
+  }
+}
+
+.close-icon {
+  inset-block-start: calc(var(--spacing) * 2);
+  inset-inline-end: calc(var(--spacing) + var(--image-aware-padding));
+
+  &::before,
+  &::after {
+    --width: 75%;
+    --height: 0;
+
+    border-block-start: var(--line-thickness) solid var(--color-text-bright);
+    transform-origin: 50% 50%;
+    margin-inline: auto;
+    inset-block-start: calc(50% - var(--line-thickness) / 2);
+    inset-inline: 0;
+  }
+
+  &::before {
+    transform: rotate(45deg);
+  }
+
+  &::after {
+    transform: rotate(-45deg);
+  }
+}
+
+.left-content::after,
+.site-navigation::after {
+  background-color: red;
+  z-index: 10000;
+
+  /* Comment out to debug */
+  visibility: hidden;
+}
+
+/*
+  Content swaps between one to two columns based on content-width
+*/
+
+:root {
+  --min-text-width: 34rem;
+  --content-min-width: calc(var(--image-width) + var(--min-text-width) * 2);
+}
+
+main {
+  /* already a flexbox container */
+
+  /* Attach animations and scope */
+  timeline-scope: --content-width;
+  animation: expand-content;
+  animation-timeline: --content-width;
+
+  /* Attach animation timeline to all children */
+  & > *,
+  &::before,
+  &::after {
+    animation-timeline: --content-width;
+  }
+
+  /* Now attach individual animation */
+  &::before {
+    animation-name: wall;
+  }
+
+  &::after {
+    animation-name: kitten;
+  }
+}
+
+/* Swaps to a two-column layout when marker is in-view */
+@keyframes expand-content {
+  0%,
+  100% {
+    flex-direction: row;
+    align-items: center;
+    max-height: 30rem;
+  }
+}
+
+@keyframes wall {
+  0%,
+  100% {
+    width: 50%;
+  }
+}
+
+@keyframes kitten {
+  0%,
+  100% {
+    background-image: url("https://assets.codepen.io/197359/kitten-peek-transparent.png");
+    inset-inline-start: calc(
+      50vw - calc(var(--image-width) * var(--image-clip-offset))
+    );
+    transform: none;
+    width: 50%;
+  }
+}
+
+.left-content {
+  animation-name: main-content;
+
+  /* Content width marker */
+  /* When this is in-view, the animations will trigger */
+  &::after {
+    content: "";
+    position: fixed;
+    top: 50%;
+    inset-inline-start: var(--content-min-width);
+
+    width: 1px;
+    height: 50px;
+
+    view-timeline: --content-width inline;
+  }
+}
+
+.right-content {
+  animation-name: main-content, right-content;
+}
+
+@keyframes main-content {
+  0%,
+  100% {
+    flex: 1;
+    margin-inline-end: 0;
+    margin-block-end: calc(var(--spacing) * 2);
+    max-width: calc(50% - var(--spacing) / 2);
+  }
+}
+
+@keyframes right-content {
+  0%,
+  100% {
+    align-self: flex-end;
+    padding-inline-start: calc(
+      var(--image-width) - var(--image-width) * var(--image-clip-offset)
+    );
+  }
+}
+
+/*
+  Navigation swaps between hidden to expanded when there's enough space
+*/
+
+:root {
+  timeline-scope: --expanded-navigation;
+}
+
+.site-header {
+  overflow: hidden;
+}
+
+/* Navigation */
+.site-navigation {
+  flex-shrink: 0;
+  position: relative;
+  width: max-content;
+  visibility: hidden;
+
+  animation-name: expand-navigation;
+  animation-timeline: --expanded-navigation;
+
+  /* Marker */
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-end: 0;
+
+    width: 1px;
+    height: 100%;
+
+    view-timeline: --expanded-navigation inline;
+  }
+}
+
+@keyframes expand-navigation {
+  0%,
+  100% {
+    /* Setting custom props for children */
+    --nav-wrapper-display: block;
+    --nav-wrapper-transform: none;
+    --nav-wrapper-background: transparent;
+
+    visibility: visible;
+  }
+}
+
+/* Navigation list */
+.nav-list {
+  display: flex;
+}
+
+/* Menu button, display:none on large screens */
+.hamburger-icon {
+  animation-name: hide-menu-button;
+  animation-timeline: --expanded-navigation;
+}
+
+@keyframes hide-menu-button {
+  0%,
+  100% {
+    display: none;
+  }
+}
+
+/* Menu close button, display:none unless menu opened */
+.close-icon {
+  display: none;
+  position: fixed;
+  z-index: 100;
+}
+
+/* Open/close animation */
+
+/* Menu styling */
+/* Since the custom props are set inside the animation (which triggers on large screens), the defaults will be used on small screens */
+.navigation-animation-wrapper {
+  background-color: var(--nav-wrapper-background, var(--color-background));
+  display: var(--nav-wrapper-display, flex);
+  align-items: center;
+  justify-content: center;
+  inset: 0;
+  transform: var(--nav-wrapper-transform, translateX(100%));
+  z-index: 100;
+}
+
+/* On open */
+
+html:has(.open-navigation:checked) {
+  overflow: hidden;
+
+  /* 
+    expand-navigation is automatically triggered and the element becomes visible
+    due to the properties we are applying that move the marker within the viewport
+  */
+  .navigation-animation-wrapper {
+    background-color: var(--color-background);
+    display: flex;
+    position: fixed;
+    transition: transform 0.25s ease-out;
+    transform: none;
+    width: 100%;
+  }
+
+  .nav-list {
+    flex-direction: column;
+
+    & li {
+      margin: 0;
+    }
+  }
+
+  .close-icon {
+    display: block;
+  }
+}
+
+/* On close */
+html:has(.close-navigation:checked) {
+  .navigation-animation-wrapper {
+    animation: slide-out 0.25s ease-out;
+  }
+
+  .nav-list {
+    animation: opacity-out 0.25s ease-out;
+  }
+}
+
+/* 
+  Because we're swapping non-animatable properties, we'll use a keyframe animation
+  to first animate the animatable properties while preserving the layout
+  and then, at the last moment, allow the non-animatable properties to swap out
+*/
+
+@keyframes slide-out {
+  0% {
+    transform: none;
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+
+  /* Preserve properties until right before the end */
+  0%,
+  99% {
+    background-color: var(--color-background);
+    display: flex;
+    position: fixed;
+    width: 100%;
+  }
+}
+
+@keyframes opacity-out {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+
+  /* Preserve properties until right before the end */
+  0%,
+  99% {
+    flex-direction: column;
+  }
+}
+
+@supports not (animation-timeline: view(inline)) {
+  /* Show warning on non-supporting browsers */
+  .warning {
+    display: block;
+    font-size: 0.8em;
+    text-align: center;
+    padding-inline: var(--image-aware-padding);
+  }
+
+  /* Smooth menu transition on non-supporting browsers */
+  /* Just because it doesn't work doesn't mean it can't be pretty #me */
+  .site-navigation {
+    transition: 0.25s ease-in-out;
+    visibility: visible;
+  }
+}
+
+
+.search{
+  border: 1px solid var(--color-cyan);
+  width: 400px;
+  /* height: 60px; */
+  overflow-x: hidden;
+  display: flex;
+  border-radius: 50px;
+  font-size: 18px;
+  /* position: relative; */
+  /* left:30%;
+  top:200px; */
+  margin: 200px auto; /* Center align using margin */
+}
+.search input{
+  width: 350px;
+  /* height:65px; */
+  border: none;
+  background: transparent;
+  padding: 8px 20px;
+  outline: none;
+  font-size: 16px;
+  opacity: 50%;
+ 
+}
+.button-src{
+  /* padding: 10px 110px;  */
+  display: inline-block;
+}
+.button-src button{
+  padding: 8px 30px 6px 30px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  margin: 7px 5px;
+  background-color: #55EED0;
+  color: rgb(0, 0, 0);
+  font-size: 18px;
+}
+
+.search:hover {
+  box-shadow: #50D8D7;
+}
