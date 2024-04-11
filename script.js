@@ -4,6 +4,10 @@ document.addEventListener('DOMContentLoaded', function () {
     var shortenedURLTextarea = document.getElementById('shortenedURL');
     var copyButton = document.getElementById('copyButton');
 
+    // Hide the Shortened URL textarea and Copy button by default
+    shortenedURLTextarea.style.display = 'none';
+    copyButton.style.display = 'none';
+
     shortenButton.addEventListener('click', function () {
         var url = urlInput.value;
 
@@ -24,6 +28,9 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(data => {
             // Display the shortened URL to the user
             shortenedURLTextarea.value = data.shortened_url;
+            // Show the Shortened URL textarea and Copy button
+            shortenedURLTextarea.style.display = 'block';
+            copyButton.style.display = 'inline-block';
         })
         .catch(error => {
             console.error('Error:', error);

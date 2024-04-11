@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ZipLink</title>
     <link rel="stylesheet" href="home.css">
+    <!-- Prevent the browser from requesting favicon.ico -->
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 </head>
 <body>
     <div class="warning">Your browser doesn't support scroll animations. This demo will not work.</div>
@@ -37,12 +39,15 @@
         </div>
         <div class="right-content">
             <div class="search">
-              <input type="text" id="urlInput" placeholder="Paste your link...">
-              <div class="button-src">
-                  <button id="shortenButton">Shorten</button>
-              </div>
-           </div>
-           <div id="shortenedURL"></div>
+                <input type="text" id="urlInput" placeholder="Paste your link...">
+                <div class="button-src">
+                    <button id="shortenButton">Shorten</button>
+                </div>
+            </div>
+            <div>
+                <textarea id="shortenedURL" rows="3" placeholder="Shortened URL will appear here" readonly></textarea>
+                <button id="copyButton">Copy</button>
+            </div>
         </div>
     </main>
     <footer>
